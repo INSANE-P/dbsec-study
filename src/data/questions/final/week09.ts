@@ -32,6 +32,15 @@ export const week09: Question[] = [
     modelAnswer:
       "**① 주체(Subject; S)**: 객체에 접근할 수 있는 대상. 모든 사용자·시스템·응용 프로그램의 프로세스 등.\n**② 객체(Object; O)**: 주체가 접근·사용하려는 대상. 데이터(DB)·서버·파일·응용 프로그램 등.\n**③ 접근 권한(Access Right)**: 특정 주체가 특정 객체에 접근하는 방법을 지정한 것. 읽기(R)·쓰기(W)·실행(X)·삭제(D)·생성(C) 등.",
     tags: ["주체", "객체", "접근권한"],
+    grading: {
+      must: ["주체", "객체", "접근 권한"],
+      bonus: ["Subject", "Object", "Access Right"],
+      synonyms: {
+        주체: ["subject"],
+        객체: ["object"],
+        "접근 권한": ["access right", "접근권한"],
+      },
+    },
   },
   {
     id: "fin-w09-q03",
@@ -101,6 +110,14 @@ export const week09: Question[] = [
     modelAnswer:
       "| 구분 | ACL | Capability List |\n|---|---|---|\n| 중심(기준) | **객체 중심** | **주체 중심** |\n| 표현 | 객체별로 (주체, 권한) 리스트 | 주체별로 (객체, 권한) 리스트 |\n| 단점 | 한 객체에 주체가 많으면 리스트가 길어져 탐색 시간 증가 | 한 주체가 접근할 객체가 많으면 탐색 시간 증가 |\n\n둘 다 ACM(접근제어행렬)을 실제로 구현하는 방법이며, Capability List는 토큰(Token)이라고도 한다.",
     tags: ["ACL", "Capability List"],
+    grading: {
+      must: ["객체 중심", "주체 중심"],
+      bonus: ["ACM", "토큰", "탐색"],
+      synonyms: {
+        "객체 중심": ["객체중심"],
+        "주체 중심": ["주체중심"],
+      },
+    },
   },
   {
     id: "fin-w09-q07",
@@ -112,5 +129,45 @@ export const week09: Question[] = [
     modelAnswer:
       "**장점**\n- 필요에 따라 유연하게 접근제어 가능(융통성)\n- 구현이 용이하고 사용이 간단\n- 객체별로 세분화된 접근제어 가능\n\n**단점**\n- 객체 소유자가 임의로 권한을 허용하므로 보안성이 취약\n- 엄격한 접근제어가 어려움\n- 다른 주체의 신분 도용 시 중대한 결함(권한 탈취 시 소유 객체 전체 접근권 획득). 예) root 권한 탈취 시 시스템 전체 장악.",
     tags: ["DAC", "장단점"],
+    grading: {
+      must: ["유연", "구현", "소유자", "보안성"],
+      bonus: ["신분 도용", "세분화", "융통성"],
+      synonyms: {
+        유연: ["융통성", "flexible"],
+        보안성: ["보안"],
+      },
+    },
+  },
+  {
+    id: "fin-w09-q08",
+    scope: "final",
+    week: 9,
+    type: "ACM",
+    prompt:
+      "아래 접근제어행렬(ACM)을 ACL(접근제어목록)과 Capability List(권한목록)로 각각 모두 변환하시오.",
+    table: {
+      name: "ACM (행=주체, 열=객체)",
+      columns: ["주체＼객체", "급여파일", "인사파일", "보고서"],
+      rows: [
+        ["김부장", "RW", "RW", "RWX"],
+        ["이대리", "R", "-", "RW"],
+        ["박사원", "-", "-", "R"],
+      ],
+      note: "R=읽기, W=쓰기, X=실행, -=권한없음",
+    },
+    modelAnswer:
+      "**ACL (객체 중심, 열을 읽어 객체별 (주체, 권한))**\n- 급여파일: [(김부장, RW), (이대리, R), (박사원, -)]\n- 인사파일: [(김부장, RW), (이대리, -), (박사원, -)]\n- 보고서: [(김부장, RWX), (이대리, RW), (박사원, R)]\n\n**Capability List (주체 중심, 행을 읽어 주체별 (객체, 권한))**\n- 김부장: [(급여파일, RW), (인사파일, RW), (보고서, RWX)]\n- 이대리: [(급여파일, R), (인사파일, -), (보고서, RW)]\n- 박사원: [(급여파일, -), (인사파일, -), (보고서, R)]\n\n암기: **ACL=열(객체) 단위, Capability=행(주체) 단위**.",
+    tags: ["ACM", "ACL", "Capability List", "변환"],
+  },
+  {
+    id: "fin-w09-q09",
+    scope: "final",
+    week: 9,
+    type: "권한쿼리",
+    prompt:
+      "SQL 권한 관리에 대해 다음 작업을 수행하는 쿼리를 작성하시오. (기말 기출 유형)\n(1) 비밀번호 '1234'로 사용자 user1 생성\n(2) user1에게 student 테이블의 조회·삽입 권한 부여\n(3) user1에게서 student 테이블의 삽입 권한만 회수",
+    modelAnswer:
+      "(1) ```sql\nCREATE USER user1 IDENTIFIED BY '1234';\n```\n(2) ```sql\nGRANT SELECT, INSERT ON student TO user1;\n```\n(3) ```sql\nREVOKE INSERT ON student FROM user1;\n```\n→ CREATE USER(사용자 생성) → GRANT(권한 부여) → REVOKE(권한 회수)의 흐름. 권한은 SELECT·INSERT처럼 종류를 콤마로 나열해 일부만 부여·회수할 수 있다.",
+    tags: ["CREATE USER", "GRANT", "REVOKE", "권한관리"],
   },
 ];
