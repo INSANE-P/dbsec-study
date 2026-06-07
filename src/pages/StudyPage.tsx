@@ -107,10 +107,17 @@ export default function StudyPage() {
     return true;
   });
   if (shuffleSeed) {
+    // id가 끝자리만 다른 경우에도 잘 섞이도록 FNV-1a + 아발란치(비선형 혼합) 사용
     const hash = (id: string) => {
-      let h = shuffleSeed;
-      for (let i = 0; i < id.length; i++) h = (h * 31 + id.charCodeAt(i)) >>> 0;
-      return h;
+      let h = (2166136261 ^ shuffleSeed) >>> 0;
+      for (let i = 0; i < id.length; i++) {
+        h ^= id.charCodeAt(i);
+        h = Math.imul(h, 16777619);
+      }
+      h ^= h >>> 13;
+      h = Math.imul(h, 0x5bd1e995);
+      h ^= h >>> 15;
+      return h >>> 0;
     };
     filtered = [...filtered].sort((a, b) => hash(a.id) - hash(b.id));
   }
@@ -163,14 +170,23 @@ export default function StudyPage() {
               즐겨찾기 {bookmarkCount > 0 && `(${bookmarkCount})`}
             </button>
             <button
-              onClick={() => setShuffleSeed((v) => (v ? 0 : Math.floor(performance.now()) + 1))}
+              onClick={() => setShuffleSeed((s) => s + 1)}
+              title="누를 때마다 문제 순서를 새로 섞어요"
               className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-bold transition-colors ${
                 shuffleSeed ? "bg-brand-blue text-white" : "bg-surface-2 text-muted-strong hover:text-brand-blue"
               }`}
             >
               <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 3h5v5M4 20 21 3M21 16v5h-5M15 15l6 6M4 4l5 5" /></svg>
-              섞기
+              {shuffleSeed ? "다시 섞기" : "섞기"}
             </button>
+            {shuffleSeed > 0 && (
+              <button
+                onClick={() => setShuffleSeed(0)}
+                className="inline-flex items-center gap-1 rounded-full bg-surface-2 px-3 py-1.5 text-sm font-bold text-muted-strong transition-colors hover:text-foreground"
+              >
+                원래 순서
+              </button>
+            )}
             <label className="flex cursor-pointer items-center gap-2 text-sm font-medium text-muted-strong">
               <input
                 type="checkbox"
