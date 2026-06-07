@@ -1,0 +1,16 @@
+{
+  "name": "데이터베이스 보안 시험 공부",
+  "short_name": "데베보 공부",
+  "description": "혼자서도 든든한 데이터베이스 보안 기출 문제집 + 개념 정리",
+  "lang": "ko",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f2f4f6",
+  "theme_color": "#3f63d9",
+  "icons": [
+    { "src": "./favicon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "./favicon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "./favicon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
