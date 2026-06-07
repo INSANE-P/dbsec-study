@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { ALL_QUESTIONS } from "@/data/questions";
 import { useProgress } from "@/lib/progressStore";
 import { byScope, computeStats, type Stats } from "@/lib/stats";
+import { ALL_TYPES } from "@/lib/ui";
 import ProgressBar from "@/components/ProgressBar";
 
 const LOGO = `${import.meta.env.BASE_URL}db-logo.png`;
@@ -50,6 +51,14 @@ export default function HomePage() {
   const fin = computeStats(byScope(ALL_QUESTIONS, "final"), progress);
   const wrongCount = all.wrong + all.unsure;
   const pct = all.total === 0 ? 0 : Math.round((all.graded / all.total) * 100);
+
+  // 유형별 정답률 (채점한 문제가 있는 유형만, 정답률 낮은 순)
+  const typeStats = ALL_TYPES.map((type) => ({
+    type,
+    ...computeStats(ALL_QUESTIONS.filter((q) => q.type === type), progress),
+  }))
+    .filter((t) => t.graded > 0)
+    .sort((a, b) => a.accuracy - b.accuracy);
 
   return (
     <div className="space-y-7">
@@ -102,6 +111,33 @@ export default function HomePage() {
         <QuickLink to="/concepts" title="개념 정리" desc="약어 · 비교표 암기" />
         <QuickLink to="/wrong" title={`오답노트 (${wrongCount})`} desc="틀림 · 애매 모아보기" />
       </section>
+
+      {/* 유형별 약점 분석 */}
+      {typeStats.length > 0 && (
+        <section className="card-soft rounded-3xl bg-surface p-6">
+          <h2 className="text-lg font-extrabold text-foreground">유형별 정답률</h2>
+          <p className="mb-4 text-sm text-muted">채점한 문제 기준 · 정답률이 낮은 유형부터</p>
+          <div className="space-y-3">
+            {typeStats.map((t) => {
+              const weak = t.accuracy < 60;
+              return (
+                <div key={t.type} className="flex items-center gap-3">
+                  <span className="w-20 shrink-0 text-sm font-bold text-foreground">{t.type}</span>
+                  <div className="h-2.5 flex-1 overflow-hidden rounded-full bg-border">
+                    <div
+                      className={`h-full rounded-full transition-[width] duration-500 ${weak ? "bg-brand-red" : "bg-brand-green"}`}
+                      style={{ width: `${t.accuracy}%` }}
+                    />
+                  </div>
+                  <span className={`w-24 shrink-0 text-right text-sm font-bold ${weak ? "text-brand-red" : "text-muted-strong"}`}>
+                    {t.accuracy}% <span className="font-medium text-muted">({t.correct}/{t.graded})</span>
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+      )}
 
       {/* 초기화 */}
       <section className="flex justify-end">
