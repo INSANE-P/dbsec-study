@@ -15,6 +15,7 @@ import {
   getAllProgress,
   setGrade as persistGrade,
   saveAnswer as persistAnswer,
+  setBookmark as persistBookmark,
   clearProgress as persistClear,
   resetAll as persistResetAll,
   type Grade,
@@ -27,6 +28,7 @@ type Ctx = {
   progress: Store;
   grade: (id: string, g: Grade) => void;
   saveAnswer: (id: string, a: string) => void;
+  toggleBookmark: (id: string) => void;
   clearOne: (id: string) => void;
   resetAll: () => void;
 };
@@ -52,6 +54,14 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
     }));
   }, []);
 
+  const toggleBookmark = useCallback((id: string) => {
+    setProgress((prev) => {
+      const next = !prev[id]?.bookmark;
+      persistBookmark(id, next);
+      return { ...prev, [id]: { ...prev[id], bookmark: next, updatedAt: Date.now() } };
+    });
+  }, []);
+
   const clearOne = useCallback((id: string) => {
     persistClear(id);
     setProgress((prev) => {
@@ -67,8 +77,8 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const value = useMemo(
-    () => ({ progress, grade, saveAnswer, clearOne, resetAll }),
-    [progress, grade, saveAnswer, clearOne, resetAll],
+    () => ({ progress, grade, saveAnswer, toggleBookmark, clearOne, resetAll }),
+    [progress, grade, saveAnswer, toggleBookmark, clearOne, resetAll],
   );
 
   return (

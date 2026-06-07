@@ -9,7 +9,7 @@ import SelfGrade from "./SelfGrade";
 
 // 문제 한 개 카드: 발문 → 답안 입력 → '답 확인' → 모범답안 펼침 → 셀프 채점
 export default function QuestionCard({ q, index }: { q: Question; index?: number }) {
-  const { progress, grade, saveAnswer } = useProgress();
+  const { progress, grade, saveAnswer, toggleBookmark } = useProgress();
   const p = progress[q.id];
   const [revealed, setRevealed] = useState(false);
   const [answer, setAnswer] = useState(p?.answer ?? "");
@@ -35,12 +35,26 @@ export default function QuestionCard({ q, index }: { q: Question; index?: number
         <span className={`rounded-full px-2.5 py-1 text-xs font-bold ${TYPE_BADGE[q.type]}`}>
           {q.type}
         </span>
-        {p?.grade && (
-          <span className="ml-auto inline-flex items-center gap-1.5 text-xs font-bold text-muted-strong">
-            <span className={`h-2 w-2 rounded-full ${GRADE_DOT[p.grade]}`} />
-            {GRADE_LABEL[p.grade]}
-          </span>
-        )}
+        <div className="ml-auto flex items-center gap-2.5">
+          {p?.grade && (
+            <span className="inline-flex items-center gap-1.5 text-xs font-bold text-muted-strong">
+              <span className={`h-2 w-2 rounded-full ${GRADE_DOT[p.grade]}`} />
+              {GRADE_LABEL[p.grade]}
+            </span>
+          )}
+          <button
+            onClick={() => toggleBookmark(q.id)}
+            aria-label={p?.bookmark ? "즐겨찾기 해제" : "즐겨찾기 추가"}
+            aria-pressed={!!p?.bookmark}
+            className={`-m-1 rounded-lg p-1 transition-colors ${
+              p?.bookmark ? "text-amber-400" : "text-muted hover:text-amber-400"
+            }`}
+          >
+            <svg viewBox="0 0 24 24" className="h-5 w-5" fill={p?.bookmark ? "currentColor" : "none"} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.8 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z" />
+            </svg>
+          </button>
+        </div>
       </div>
 
       {/* 발문 */}

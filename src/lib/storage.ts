@@ -12,6 +12,8 @@ export type Progress = {
   grade?: Grade;
   /** 사용자가 입력한 답 (재방문 시 복원) */
   answer?: string;
+  /** 즐겨찾기(별표) 여부 */
+  bookmark?: boolean;
   /** 마지막 갱신 시각 (epoch ms) */
   updatedAt: number;
 };
@@ -55,6 +57,12 @@ export function setGrade(id: string, grade: Grade) {
 export function saveAnswer(id: string, answer: string) {
   const store = read();
   store[id] = { ...store[id], answer, updatedAt: Date.now() };
+  write(store);
+}
+
+export function setBookmark(id: string, bookmark: boolean) {
+  const store = read();
+  store[id] = { ...store[id], bookmark, updatedAt: Date.now() };
   write(store);
 }
 
