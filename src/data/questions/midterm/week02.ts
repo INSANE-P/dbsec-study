@@ -24,6 +24,10 @@ export const week02: Question[] = [
     modelAnswer:
       "| 분류 | 풀네임 | 용도 | 명령어 |\n|---|---|---|---|\n| DDL | Data Definition Language | 스키마/테이블 정의·수정·삭제 | CREATE, ALTER, DROP |\n| DML | Data Manipulation Language | 데이터 삽입·삭제·수정·검색 | SELECT, INSERT, UPDATE, DELETE |\n| DCL | Data Control Language | 보안·권한·복구 제어 | GRANT, REVOKE, COMMIT, ROLLBACK |\n\nDCL은 DBMS의 4가지 특성(**무결성·보안·회복·동시성**)을 보장하기 위해 사용된다.",
     tags: ["SQL", "DDL", "DML", "DCL"],
+    grading: {
+      must: ["DDL", "DML", "DCL"],
+      bonus: ["CREATE", "SELECT", "GRANT", "무결성", "보안", "회복", "동시성"],
+    },
   },
   {
     id: "mid-w02-q03",

@@ -43,6 +43,11 @@ export const week09: Question[] = [
     modelAnswer:
       "**DAC** = Discretionary Access Control (임의적 접근제어)\n\n접근을 요청하는 사용자의 **신분(Identity)** 및 접근 규칙에 기반하는 접근제어. 객체의 소유자가 자신의 판단(Discretion)에 따라 임의로 권한을 부여·회수할 수 있다. 신분에 기반하므로 **IBAC(Identity-Based Access Control)**라고도 한다.\n\n**취약점**: 소유자가 임의로 권한을 줄 수 있어 보안성이 약하고, 신분 도용 시 치명적이다. 특히 응용프로그램에 내장된 **트로이 목마(Trojan Horse)** 공격으로부터 데이터를 보호하지 못한다.",
     tags: ["DAC", "IBAC", "Trojan Horse"],
+    grading: {
+      must: ["Discretionary Access Control", "신분", "소유자"],
+      bonus: ["IBAC", "트로이", "Trojan"],
+      synonyms: { 신분: ["identity", "아이덴티티"] },
+    },
   },
   {
     id: "fin-w09-q04",

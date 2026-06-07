@@ -13,6 +13,10 @@ export const week07: Question[] = [
     modelAnswer:
       "| 인증 요소 | 표어 | 예시 |\n|---|---|---|\n| 지식 기반(Knowledge) | What you know | 패스워드, PIN, 캡차(CAPTCHA) |\n| 소유 기반(Possession) | What you have | OTP, 보안카드, 토큰, 열쇠 |\n| 존재 기반(Inherence) | What you are | 지문, 홍채, 얼굴, DNA |\n| 행위 기반(Behavior) | What you do | 서명, 음성, 걸음걸이, 키 입력 속도 |\n\n두 개 이상의 요소를 함께 쓰면 **다중 인증(MFA, Multi-Factor Authentication)**이다.",
     tags: ["인증", "지식기반", "소유기반", "존재기반", "행위기반", "MFA"],
+    grading: {
+      must: ["지식", "소유", "존재", "행위"],
+      bonus: ["What you know", "패스워드", "OTP", "지문", "MFA"],
+    },
   },
   {
     id: "mid-w07-q02",

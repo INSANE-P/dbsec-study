@@ -13,6 +13,10 @@ export const week11: Question[] = [
     modelAnswer:
       "**대칭 암호화**: 암호화 키 = 복호화 키 (동일한 비밀키 사용). 관용/비밀키/단일키 암호화라고도 함. 속도가 빠르나 키 분배 문제가 있다. 대표: **DES, 3DES, AES**.\n\n**비대칭(공개키) 암호화**: 암호화 키 ≠ 복호화 키 (공개키·개인키 쌍). 키 분배 문제를 해결하지만 속도가 느리다. 대표: **RSA, Diffie-Hellman, ECC, DSS**.\n\n1976년 Diffie, Hellman, Merkle이 공개키 암호 기술을 제안했다.",
     tags: ["대칭암호", "비대칭암호", "공개키", "DES", "AES", "RSA"],
+    grading: {
+      must: ["대칭", "비대칭", "동일", "공개키", "개인키"],
+      bonus: ["DES", "AES", "RSA", "키 분배"],
+    },
   },
   {
     id: "fin-w11-q02",
