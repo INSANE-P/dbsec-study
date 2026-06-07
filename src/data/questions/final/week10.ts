@@ -67,6 +67,14 @@ export const week10: Question[] = [
     modelAnswer:
       "**MAC** = Mandatory Access Control (강제적 접근제어)\n\n주체·객체의 보안 분류 등급에 기반하여, 미리 정해진 정책에 따라 주체의 접근 권한과 객체의 허용 등급을 비교하여 접근을 제어한다. 중앙 집권적 관리자가 등급을 강제로 부여하며, 낮은 등급 주체가 높은 등급 객체에 접근하는 것을 제한한다. **규칙 기반 접근제어(Rule-Based Access Control)**라고도 한다.\n\n특징: 보안 등급 기반, 접근 규칙 수가 적어 통제 용이, 등급/규칙은 관리자만 수정 가능, 기밀성이 강조되는 조직에서 사용.",
     tags: ["MAC", "강제적 접근제어", "규칙 기반"],
+    grading: {
+      must: ["Mandatory Access Control", "보안 등급", "강제", "Rule-Based Access Control"],
+      bonus: ["중앙", "관리자", "기밀성"],
+      synonyms: {
+        "보안 등급": ["보안등급", "등급"],
+        강제: ["강제적"],
+      },
+    },
   },
   {
     id: "fin-w10-q05",
@@ -78,6 +86,14 @@ export const week10: Question[] = [
     modelAnswer:
       "**역할 폭발(Role Explosion)**: 조직·시스템이 커지면서 역할의 수가 기하급수적으로 증가하여 역할 관리가 사실상 불가능해지는 상태.\n\n발생 원인: 역할 단위로 권한을 부여하다 보면, 기존 역할과 권한이 약간만 다른 새로운 요구가 생길 때마다 역할을 새로 정의해야 한다. (예: Role1과 90% 권한이 같지만 그대로 쓰면 10%의 과도한 권한이 부여되므로 역할을 재정의) 이런 미세한 차이마다 역할이 늘어나 폭발적으로 증가한다.",
     tags: ["RBAC", "역할 폭발", "Role Explosion"],
+    grading: {
+      must: ["역할", "수", "증가", "관리"],
+      bonus: ["기하급수", "재정의", "세밀"],
+      synonyms: {
+        역할: ["role"],
+        증가: ["폭발", "늘어"],
+      },
+    },
   },
   {
     id: "fin-w10-q06",
@@ -89,6 +105,15 @@ export const week10: Question[] = [
     modelAnswer:
       "**SoD** = Separation of Duty (임무분리)\n\n- **SSD(Static Separation of Duty, 정적 임무분리)**: 한 사용자가 상호 배타적인 두 개 이상의 역할에 **아예 배정되지 못하도록** 막는다. (예: 출납과 회계 역할을 동시에 가질 수 없음)\n- **DSD(Dynamic Separation of Duty, 동적 임무분리)**: 두 역할에 배정은 **가능하지만**, 한 세션에서 **동시에 활성화(사용)할 수 없도록** 막는다.",
     tags: ["SoD", "SSD", "DSD", "임무분리"],
+    grading: {
+      must: ["Separation of Duty", "정적", "동적", "배정", "활성화"],
+      bonus: ["SSD", "DSD", "세션", "배타적"],
+      synonyms: {
+        정적: ["static", "ssd"],
+        동적: ["dynamic", "dsd"],
+        활성화: ["사용"],
+      },
+    },
   },
   {
     id: "fin-w10-q07",
@@ -100,6 +125,15 @@ export const week10: Question[] = [
     modelAnswer:
       "**RBAC**: 역할 기반으로 큰 틀의 접근제어. 특정 시간·요일에만 접근하도록 설정하기 어렵고, 환경에 따라 역할을 동적으로 변화시키기 어렵다.\n\n**ABAC**: 속성과 환경 조건 기반으로 세밀한 접근제어. 특정 시간·요일에만 접근 허용(예: 09~18시), 분산·빠르게 변화하는 환경에 동적으로 적응 가능하다.\n\n→ 실무에서는 RBAC(큰 틀)에 ABAC(세부 제어)를 조합해 사용하기도 한다. ABAC는 XACML(eXtensible Access Control Markup Language)을 통해 다양한 응용에서 활용된다.",
     tags: ["RBAC", "ABAC", "XACML"],
+    grading: {
+      must: ["역할", "속성", "환경", "동적"],
+      bonus: ["시간", "분산", "세밀", "XACML"],
+      synonyms: {
+        역할: ["role"],
+        속성: ["attribute"],
+        환경: ["환경 조건"],
+      },
+    },
   },
   {
     id: "fin-w10-q08",
@@ -111,5 +145,15 @@ export const week10: Question[] = [
     modelAnswer:
       "**ABAC 요소**: 주체(Subject), 객체(Object=자원), 속성(Attribute, 핵심 요소), 환경 조건(시간·장소 등 동적 요소).\n\n**예시**: \"내과 소속이며 환자 A의 담당의인 주체가, 09~18시 사이에 A10호에 있을 때, 내과 환자 A의 의료정보를 읽을 수 있다\"는 정책에서\n- 주체 속성: 의사 = {내과, 환자 A 담당의}\n- 객체 속성: 의료정보 = {내과, 환자 A}\n- 환경 조건: 현재 11:10, 장소 A10호\n→ 모든 속성·조건이 정책을 만족하므로 접근 허용된다.",
     tags: ["ABAC", "속성", "환경 조건"],
+    grading: {
+      must: ["주체", "객체", "속성", "환경 조건"],
+      bonus: ["시간", "장소", "동적", "정책"],
+      synonyms: {
+        주체: ["subject"],
+        객체: ["object", "자원"],
+        속성: ["attribute"],
+        "환경 조건": ["환경", "environment"],
+      },
+    },
   },
 ];

@@ -13,6 +13,13 @@ export const week06: Question[] = [
     modelAnswer:
       "**SYS**: 모든 권한을 가진 최상위 관리자 계정. 데이터 사전(Data Dictionary)을 소유하며, 설치 시 SYSDBA 권한이 자동 부여된다.\n\n**SYSTEM**: SYS와 거의 유사한 기능을 수행하지만, **백업 및 복구, 데이터베이스 업그레이드는 수행할 수 없다.**\n\n두 계정 모두 DBA Role이 자동 부여되므로 실제 DBA에게만 부여해야 한다.",
     tags: ["SYS", "SYSTEM", "Oracle 계정"],
+    grading: {
+      must: ["SYS", "SYSTEM", "데이터 사전", "백업", "복구"],
+      bonus: ["SYSDBA", "DBA Role", "업그레이드"],
+      synonyms: {
+        "데이터 사전": ["Data Dictionary"],
+      },
+    },
   },
   {
     id: "mid-w06-q02",
@@ -24,6 +31,10 @@ export const week06: Question[] = [
     modelAnswer:
       "**SYSDBA**: 가장 강력한 관리자 권한. 사용자 데이터 조회 가능, CREATE/DROP DATABASE 가능, **완전·불완전 복구 모두 가능**. SYS 스키마로 접속.\n\n**SYSOPER**: 기본 운영 작업 권한. 사용자 데이터 조회 **불가**, CREATE/DROP DATABASE **불가**, ALTER DATABASE RECOVER는 **완전 복구만 가능**(UNTIL/TIME/CHANGE/CANCEL 불완전 복구는 SYSDBA만). PUBLIC 스키마로 접속.",
     tags: ["SYSDBA", "SYSOPER", "관리자 권한"],
+    grading: {
+      must: ["SYSDBA", "SYSOPER", "사용자 데이터", "불완전 복구", "CREATE"],
+      bonus: ["완전 복구", "SYS", "PUBLIC", "DROP DATABASE"],
+    },
   },
   {
     id: "mid-w06-q03",
@@ -57,6 +68,9 @@ export const week06: Question[] = [
     modelAnswer:
       "다음 중 하나라도 해당하면 뷰를 통한 변경이 불가능하다.\n**①** 기본 테이블의 **기본키**를 구성하는 속성이 포함되지 않은 뷰\n**②** 기본 테이블에서 **NOT NULL**로 지정된 속성이 포함되지 않은 뷰\n**③** **집계 함수**로 새로 계산된 내용을 포함하는 뷰\n**④** **DISTINCT**를 포함하여 정의한 뷰\n**⑤** **GROUP BY** 절을 포함하여 정의한 뷰\n**⑥** **여러 개의 테이블을 조인**하여 정의한 뷰",
     tags: ["View", "변경 불가능한 뷰"],
+    grading: {
+      must: ["기본키", "NOT NULL", "집계 함수", "DISTINCT", "GROUP BY", "조인"],
+    },
   },
   {
     id: "mid-w06-q06",
@@ -67,6 +81,14 @@ export const week06: Question[] = [
     modelAnswer:
       "**① 질의어 간소화**: 복잡한 질의를 뷰로 만들어 간단히 조회할 수 있다.\n**② 데이터 보안**: 사용자에게 필요한 부분만 노출하여 민감 데이터를 보호한다.\n**③ 논리적 데이터 독립성**: 기본 테이블 구조가 바뀌어도 뷰를 통해 일관된 형태로 데이터를 제공할 수 있다.\n\n(단점: 가상 테이블이므로 갱신에 제약이 있고, ALTER로 뷰 정의를 변경할 수 없다.)",
     tags: ["View", "뷰 장점"],
+    grading: {
+      must: ["질의어 간소화", "데이터 보안", "논리적 데이터 독립성"],
+      bonus: ["민감", "노출"],
+      synonyms: {
+        "질의어 간소화": ["질의 간소화", "복잡한 질의"],
+        "논리적 데이터 독립성": ["논리적 독립성"],
+      },
+    },
   },
   {
     id: "mid-w06-q07",
@@ -78,6 +100,10 @@ export const week06: Question[] = [
     modelAnswer:
       "**① 로그인 감사(Login Auditing)**: 사용자의 로그인·로그인 시도를 감사.\n**② 행동 감사(Action Auditing)**: 특정 질의문(CREATE, INSERT 등)의 실행을 감사. 권한 검사 성격.\n**③ 객체 감사(Object Auditing)**: 특정 객체에 실행되는 질의문을 감사. 행동 감사와 유사하나 초점이 '행동'이 아닌 '객체'에 있다.\n\n참고: Oracle의 AUDIT_TRAIL 파라미터 값(NONE/DB/OS)으로 감사 기록 위치를 정한다.",
     tags: ["감사", "Auditing", "AUDIT_TRAIL"],
+    grading: {
+      must: ["로그인 감사", "행동 감사", "객체 감사"],
+      bonus: ["질의문", "AUDIT_TRAIL", "권한 검사"],
+    },
   },
   {
     id: "mid-w06-q08",
@@ -89,6 +115,10 @@ export const week06: Question[] = [
     modelAnswer:
       "**BY SESSION**: 한 세션에서 지정한 질의문을 여러 번 실행해도 **한 번만 기록**한다.\n**BY ACCESS**: 감사 대상 문장을 **실행할 때마다 매번 기록**한다.",
     tags: ["감사", "BY SESSION", "BY ACCESS"],
+    grading: {
+      must: ["BY SESSION", "BY ACCESS", "한 번만", "매번"],
+      bonus: ["세션", "실행할 때마다"],
+    },
   },
   {
     id: "mid-w06-q09",

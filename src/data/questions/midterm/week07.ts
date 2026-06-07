@@ -28,6 +28,10 @@ export const week07: Question[] = [
     modelAnswer:
       "(1) **MFA** = Multi-Factor Authentication (다중 인증 요소 기반 인증)\n→ 인증 요소를 두 개 이상 사용하여 보안성을 높이는 방식.\n\n(2) **OTP** = One-Time Password (일회용 비밀번호)\n→ 소유 기반 인증 수단으로, 매번 새로운 일회성 패스워드를 사용.\n\n(3) **CAPTCHA** = Completely Automated Public Turing test to tell Computers and Humans Apart\n→ 사람과 봇을 구별하기 위한 지식 기반 인증 수단.",
     tags: ["MFA", "OTP", "CAPTCHA", "약어"],
+    grading: {
+      must: ["Multi-Factor Authentication", "One-Time Password", "Turing", "일회용"],
+      bonus: ["다중 인증", "소유 기반", "사람", "봇"],
+    },
   },
   {
     id: "mid-w07-q03",
@@ -39,6 +43,14 @@ export const week07: Question[] = [
     modelAnswer:
       "**위협(Threat)**: 자산(DB)에 손실을 발생시킬 수 있는 모든 원인이나 행위. → **100% 제거가 불가능**하므로 최소화하는 것이 최선이다.\n\n**취약점(Vulnerability)**: 위협이 손실을 입히기 위해 이용하는, 자산이 가진 약점. → **제거가 가능**하므로 분석·점검을 통해 제거하는 과정이 필수이다.",
     tags: ["위협", "취약점", "Threat", "Vulnerability"],
+    grading: {
+      must: ["위협", "취약점", "제거", "약점"],
+      bonus: ["100%", "최소화", "분석", "점검"],
+      synonyms: {
+        위협: ["threat"],
+        취약점: ["vulnerability"],
+      },
+    },
   },
   {
     id: "mid-w07-q04",
@@ -50,6 +62,10 @@ export const week07: Question[] = [
     modelAnswer:
       "**① 취약점 분석**: 분석 설계(분석 대상 DB 선정·조사하여 수행 범위 결정 — 가장 기초적·중요) + 분석 구축(점검 항목·방법 결정, 내부 보안 감사 또는 모의 해킹 선택).\n\n**② 취약점 점검**: 선정한 범위·방법대로 실제 점검을 수행하고 분석 보고서를 통해 보안 조치.\n\n**③ 취약점 발견 및 제거**: 점검에서 발견된 취약점을 제거한다.",
     tags: ["취약점 분석", "분석 설계", "분석 구축"],
+    grading: {
+      must: ["취약점 분석", "취약점 점검", "제거"],
+      bonus: ["분석 설계", "분석 구축", "보고서", "모의 해킹"],
+    },
   },
   {
     id: "mid-w07-q05",
@@ -61,6 +77,10 @@ export const week07: Question[] = [
     modelAnswer:
       "**모의 해킹(Penetration Test)**: **외부 사용자**의 침해 공격을 시뮬레이션하여 취약점·공격 경로를 검출. 예) 버퍼 오버플로, DoS, Password Attack, TNS Attack.\n\n**내부 보안 감사(Security Auditing)**: DB가 보안상 안전하게 운영되는지 **내부 관점**에서 점검. 잘 알려진 취약점 존재 여부, 사용자 역할·권한·패스워드 구성의 적절성 검토.",
     tags: ["모의 해킹", "내부 보안 감사", "Penetration Test"],
+    grading: {
+      must: ["모의 해킹", "내부 보안 감사", "외부", "내부"],
+      bonus: ["Penetration Test", "공격 경로", "권한", "패스워드"],
+    },
   },
   {
     id: "mid-w07-q06",
@@ -94,5 +114,12 @@ export const week07: Question[] = [
     modelAnswer:
       "**① 패스워드 기반 인증**: 지식 기반 인증으로 모든 DBMS가 기본 제공.\n**② OS 인증**: 운영체제의 사용자 정보를 통해 인증(Oracle, MSSQL 제공).\n**③ 네트워크 인증**: 네트워크 서버 접속 시 인증 정보의 유효성을 판단. 대표 예가 **커버로스(Kerberos)** 인증으로, 사용 가능한 서비스 정보를 담은 토큰을 이용한다(Oracle, MySQL 지원).",
     tags: ["DBMS 인증", "OS 인증", "네트워크 인증", "Kerberos"],
+    grading: {
+      must: ["패스워드", "OS 인증", "네트워크 인증", "Kerberos"],
+      bonus: ["지식 기반", "운영체제", "토큰"],
+      synonyms: {
+        Kerberos: ["커버로스"],
+      },
+    },
   },
 ];

@@ -49,6 +49,10 @@ export const week14: Question[] = [
     modelAnswer:
       "(1) **PII** = Personal Identifiable Information (개인 식별 정보)\n→ 정보 주체를 특정하여 식별할 수 있는 모든 정보. 예) 이름, 주민등록번호, 전화번호.\n\n(2) **PPDC** = Privacy-Preserving Data Collection (개인정보보호 데이터 수집)\n→ 수집 단계에서 프라이버시 노출을 최소화하는 모든 기술(데이터 교란, 접근제어, 동형 암호 등).\n\n(3) **PPDM** = Privacy-Preserving Data Mining (프라이버시 보존형 데이터 마이닝)\n→ 분석 단계에서 특정 개인이 식별되지 않도록 하는 기술(차분 프라이버시 등).",
     tags: ["PII", "PPDC", "PPDM", "약어"],
+    grading: {
+      must: ["Personal Identifiable Information", "Privacy-Preserving Data Collection", "Privacy-Preserving Data Mining"],
+      bonus: ["개인 식별 정보", "수집", "분석", "데이터 마이닝"],
+    },
   },
   {
     id: "fin-w14-q04",
@@ -59,6 +63,15 @@ export const week14: Question[] = [
     modelAnswer:
       "**옵트-인(Opt-In)**: 데이터 수집자가 정보 주체에게 **사전 동의를 받아야만** 수집·활용이 가능한 방식. (국내는 모든 데이터에 옵트-인 의무화)\n\n**옵트-아웃(Opt-Out)**: 사용자가 별도의 거부 의사를 표현하지 않으면 **동의한 것으로 간주**하고 수집하는 방식. '동의하지 않는다'고 명시할 때만 수집되지 않는다.",
     tags: ["옵트인", "옵트아웃", "Opt-In", "Opt-Out"],
+    grading: {
+      must: ["옵트-인", "옵트-아웃", "사전 동의", "거부"],
+      bonus: ["동의한 것으로 간주", "수집"],
+      synonyms: {
+        "옵트-인": ["옵트인", "Opt-In", "opt in"],
+        "옵트-아웃": ["옵트아웃", "Opt-Out", "opt out"],
+        "사전 동의": ["사전동의", "동의를 받아야"],
+      },
+    },
   },
   {
     id: "fin-w14-q05",
@@ -70,6 +83,11 @@ export const week14: Question[] = [
     modelAnswer:
       "**동형 암호(Homomorphic Encryption)**: 데이터를 **암호화한 상태에서 연산**을 수행해도, 복호화한 원본 데이터로 연산한 값과 동일한 결과가 나오게 하는 차세대 암호 기술.\n\n**적합한 이유**: 원본 데이터를 공유하거나 복호화하지 않고도 암호문 상태로 분석·연산이 가능하므로, **데이터 분석과 프라이버시 보호를 동시에 달성**할 수 있다.",
     tags: ["동형 암호", "Homomorphic Encryption", "프라이버시"],
+    grading: {
+      must: ["암호화한 상태", "연산", "복호화"],
+      bonus: ["동일한 결과", "프라이버시", "암호문"],
+      synonyms: { "동형 암호": ["Homomorphic", "homomorphic encryption"], "암호화한 상태": ["암호문 상태", "암호화된 상태"] },
+    },
   },
   {
     id: "fin-w14-q06",
@@ -81,6 +99,15 @@ export const week14: Question[] = [
     modelAnswer:
       "**오버라이팅(Overwriting)**: 기존 데이터 위에 0/1 등을 여러 번 겹쳐 써서 원본을 알 수 없게 함(소프트웨어적). 디스크 **재사용 가능**(NIST SP-800-88 참조, 물리 디스크는 최소 7회 이상 반복 시 복구 불가). 단, 클라우드는 데이터 위치 파악이 어려워 잔존 가능성이 있음.\n\n**디가우싱(Degaussing)**: 강한 자기장으로 디스크를 파괴해 복구 불가능하게 함. 디스크 **재사용 불가**. → 디스크를 재사용하는 클라우드 기반 빅데이터 환경에는 **부적합**하다.",
     tags: ["오버라이팅", "디가우싱", "폐기", "Overwriting", "Degaussing"],
+    grading: {
+      must: ["오버라이팅", "디가우싱", "재사용", "자기장"],
+      bonus: ["겹쳐", "재사용 불가", "클라우드", "부적합", "NIST"],
+      synonyms: {
+        오버라이팅: ["Overwriting", "overwrite"],
+        디가우싱: ["Degaussing", "degauss"],
+        자기장: ["자기력", "magnetic"],
+      },
+    },
   },
   {
     id: "fin-w14-q07",
@@ -106,5 +133,14 @@ export const week14: Question[] = [
     modelAnswer:
       "**식별자**: 그 자체로 개인 식별이 가능한 개인 식별 정보(PII). 예) 이름, 주소, 성별, 주민등록번호, 전화번호.\n\n**준식별자**: 단독으로는 식별이 어렵지만, 다른 정보와 **결합하면** 개인을 식별할 가능성이 있는 데이터. 예) 생년월일, 우편번호.\n\n**연결 공격 사례(Sweeney)**: 비식별화된 매사추세츠 공무원 의료정보를, 유권자 명부와 대조(생년월일·성별·우편번호 등 준식별자 결합)하여 주지사를 간단히 재식별한 사례. → K-익명성 등장 배경.",
     tags: ["식별자", "준식별자", "연결 공격", "Sweeney"],
+    grading: {
+      must: ["식별자", "준식별자", "결합", "연결 공격"],
+      bonus: ["PII", "생년월일", "우편번호", "재식별", "Sweeney", "K-익명성"],
+      synonyms: {
+        준식별자: ["Quasi-Identifier", "준 식별자"],
+        "연결 공격": ["Linking Attack", "linking"],
+        결합: ["조합", "대조"],
+      },
+    },
   },
 ];

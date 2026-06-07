@@ -28,6 +28,15 @@ export const week11: Question[] = [
     modelAnswer:
       "(1) **DES** = Data Encryption Standard\n→ 1977년 FIPS로 채택된 대칭 블록 암호. 64비트 블록, 56비트 키, 16라운드. 키가 짧아 전사 공격에 취약해 현재는 사용하지 않으며 AES로 대체됨.\n\n(2) **AES** = Advanced Encryption Standard\n→ DES를 대체한 표준 대칭 암호(Rijndael 선정). 128비트 블록, 키 128/192/256비트(라운드 10/12/14). 현재 가장 널리 사용.\n\n(3) **RSA** = Rivest, Shamir, Adleman (제안자 3인)\n→ 1977년 제안된 대표적 비대칭(공개키) 암호. 키 전송·전자서명에 이용.",
     tags: ["DES", "AES", "RSA", "약어"],
+    grading: {
+      must: ["Data Encryption Standard", "Advanced Encryption Standard", "Rivest", "Shamir", "Adleman"],
+      bonus: ["56비트", "128비트", "블록", "공개키", "Rijndael"],
+      synonyms: {
+        Rivest: ["리베스트"],
+        Shamir: ["샤미르"],
+        Adleman: ["애들먼", "아델만"],
+      },
+    },
   },
   {
     id: "fin-w11-q03",
@@ -39,6 +48,15 @@ export const week11: Question[] = [
     modelAnswer:
       "**① 암호화/복호화**: 송신자가 **수신자의 공개키**로 암호화 → 수신자가 **자신의 개인키**로 복호화. (기밀성)\n\n**② 디지털 서명**: 송신자가 **자신의 개인키**로 암호화(서명) → 수신자가 **송신자의 공개키**로 복호화(검증). (방향이 반대! 인증·부인방지)\n\n**③ 키 분배**: 세션키를 **수신자의 공개키**로 암호화해 전송 → 수신자가 **자신의 개인키**로 복호화해 세션키 획득.",
     tags: ["공개키", "디지털 서명", "키 분배"],
+    grading: {
+      must: ["공개키", "개인키", "암호화", "복호화", "서명"],
+      bonus: ["수신자", "송신자", "키 분배", "검증", "기밀성"],
+      synonyms: {
+        공개키: ["public key"],
+        개인키: ["private key", "비밀키"],
+        서명: ["디지털 서명", "전자서명"],
+      },
+    },
   },
   {
     id: "fin-w11-q04",
@@ -50,6 +68,14 @@ export const week11: Question[] = [
     modelAnswer:
       "**키 분배 문제**: 대칭 암호는 송·수신자가 비밀키를 사전에 안전하게 공유해야 하며, 사용자 수가 늘수록 관리할 키가 급증한다.\n\n**필요한 키 개수**: n명의 사용자 → 총 **n(n-1)/2개**의 키가 필요하고, 각 사용자는 (n-1)개의 키를 보관해야 한다.\n\n**해결 방법**: ① 키 사전 공유 ② 키 배포 센터(KDC) 이용 ③ Diffie-Hellman 키 교환 ④ 공개키 암호 이용.",
     tags: ["키 분배", "KDC", "Diffie-Hellman"],
+    grading: {
+      must: ["비밀키", "공유", "n(n-1)/2", "KDC"],
+      bonus: ["Diffie-Hellman", "공개키", "키 배포 센터", "n-1"],
+      synonyms: {
+        "n(n-1)/2": ["n(n-1)/2개", "nc2"],
+        KDC: ["키 배포 센터", "key distribution center"],
+      },
+    },
   },
   {
     id: "fin-w11-q05",
@@ -61,6 +87,15 @@ export const week11: Question[] = [
     modelAnswer:
       "암·복호화 모듈의 위치와 요청 위치에 따라 분류한다.\n\n**DB 서버 내부**\n- DB 서버 암호화 (플러그인 방식)\n- DBMS 자체 암호화 (TDE, 커널 방식)\n- DBMS 암호화 기능 호출 (API 방식)\n\n**DB 서버 외부**\n- 응용 프로그램 자체 암호화 (API 라이브러리)\n- 운영체제 암호화 (OS의 입출력 호출 이용, DB 파일 자체 암호화)",
     tags: ["DB암호화 방식", "TDE", "플러그인"],
+    grading: {
+      must: ["DB 서버 내부", "DB 서버 외부", "플러그인", "TDE", "API"],
+      bonus: ["커널", "응용 프로그램", "운영체제", "DBMS"],
+      synonyms: {
+        TDE: ["커널"],
+        "DB 서버 내부": ["서버 내부", "내부"],
+        "DB 서버 외부": ["서버 외부", "외부"],
+      },
+    },
   },
   {
     id: "fin-w11-q06",
@@ -72,6 +107,15 @@ export const week11: Question[] = [
     modelAnswer:
       "**AES 키 길이별 라운드 수**\n- 128비트 → 10라운드\n- 192비트 → 12라운드\n- 256비트 → 14라운드\n(키가 길수록 보안성↑, 암호화 시간↑)\n\n**DES vs AES**\n| 구분 | DES | AES |\n|---|---|---|\n| 블록 크기 | 64비트 | 128비트 |\n| 키 길이 | 56비트 | 128/192/256비트 |",
     tags: ["AES", "DES", "라운드", "블록"],
+    grading: {
+      must: ["10라운드", "12라운드", "14라운드", "64비트", "128비트", "56비트"],
+      bonus: ["192비트", "256비트", "블록 크기", "키 길이"],
+      synonyms: {
+        "10라운드": ["10", "10 라운드"],
+        "12라운드": ["12", "12 라운드"],
+        "14라운드": ["14", "14 라운드"],
+      },
+    },
   },
   {
     id: "fin-w11-q07",
@@ -83,5 +127,10 @@ export const week11: Question[] = [
     modelAnswer:
       "**암호화(Encryption)**: 암호 키를 사용하여 평문(P)을 의미를 알 수 없는 암호문(C)으로 변환하는 것.\n**복호화(Decryption)**: 복호 키를 사용하여 암호문(C)을 원래 평문(P)으로 복원하는 것.\n\n**기호 표현**\n- 암호화: C = E_K(P) (평문 P를 키 K로 암호화 E)\n- 복호화: P = D_K(C) (암호문 C를 키 K로 복호화 D)",
     tags: ["암호화", "복호화", "평문", "암호문"],
+    grading: {
+      must: ["암호화", "복호화", "평문", "암호문"],
+      bonus: ["암호 키", "E_K", "D_K"],
+      synonyms: { 암호화: ["encryption"], 복호화: ["decryption"] },
+    },
   },
 ];

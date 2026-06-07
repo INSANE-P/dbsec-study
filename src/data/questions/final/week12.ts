@@ -60,6 +60,11 @@ export const week12: Question[] = [
     modelAnswer:
       "**마스터 키(Master Key)**: 실제 DB를 암호화한 암호 키(데이터 키)를 **다시 한 번 암호화**하는 키.\n\n**안전한 이유**: 실제 데이터를 암호화하는 데이터 키가 마스터 키로 암호화되어 있으므로, 데이터 키가 테이블 등에 저장되어 있어도 암호화된 상태라 상대적으로 안전하다. 관리자는 **마스터 키만 안전하게 관리**하면 된다(Oracle, MySQL TDE에서 채택). 단점은 안전한 마스터 키 관리 방안이 별도로 필요하다는 점이다.",
     tags: ["마스터키", "TDE", "데이터키"],
+    grading: {
+      must: ["데이터 키", "암호화", "마스터 키만"],
+      bonus: ["Oracle", "MySQL", "TDE"],
+      synonyms: { "데이터 키": ["데이터키", "암호 키"], "마스터 키만": ["마스터키만", "master key"] },
+    },
   },
   {
     id: "fin-w12-q05",
@@ -71,6 +76,17 @@ export const week12: Question[] = [
     modelAnswer:
       "| 모드 | 풀네임 | 핵심 특징 |\n|---|---|---|\n| ECB | Electronic CodeBook | 블록별 독립 암호화. 병렬처리 가능·빠름 / 키 값 유추 가능, 낮은 안전성 |\n| CBC | Cipher Block Chaining | 앞 암호문 블록과 평문을 XOR 후 암호화(체인). 병렬처리 어려움 |\n| CFB | Cipher FeedBack | 앞 암호문 블록을 알고리즘 입력으로 사용. 첫 블록은 IV 사용 |\n| OFB | Output FeedBack | 평문과 알고리즘 '출력'을 XOR. XOR 전 블록을 다음에 전달 |\n| CTR | CounTeR | 1씩 증가하는 카운터를 암호화해 키 스트림 생성. ECB처럼 병렬처리 가능 |\n\n병렬처리 가능: ECB, CTR / 어려움: CBC, CFB, OFB.",
     tags: ["블록 암호 모드", "ECB", "CBC", "CFB", "OFB", "CTR"],
+    grading: {
+      must: ["Electronic CodeBook", "Cipher Block Chaining", "Cipher FeedBack", "Output FeedBack", "CounTeR"],
+      bonus: ["병렬처리", "XOR", "IV", "카운터"],
+      synonyms: {
+        "Electronic CodeBook": ["ECB"],
+        "Cipher Block Chaining": ["CBC"],
+        "Cipher FeedBack": ["CFB"],
+        "Output FeedBack": ["OFB"],
+        "CounTeR": ["CTR", "Counter"],
+      },
+    },
   },
   {
     id: "fin-w12-q06",
@@ -82,6 +98,11 @@ export const week12: Question[] = [
     modelAnswer:
       "**가장 중요한 이유**: 키 관리가 허술하면 공격자가 암호 키를 취득해 복호화로 원본 데이터를 얻을 수 있어, 아무리 강력한 암호화 기술을 적용해도 무력화되기 때문이다.\n\n**키 관리가 필요한 3가지 이유 → 대응책**\n1. 키를 변경 없이 계속 사용 → 보안 사고 가능성↑ ⇒ 여러 암호 키 사용\n2. 하나의 키로 모든 암호화 → 유출 시 큰 피해 ⇒ 주기적인 암호 키 변경(재발급)\n3. 암호 키 분실 → 복호화 불가로 데이터 손실 ⇒ 암호 키 백업\n\n⇒ 이 세 가지를 통합 수행하는 것이 **키 관리 시스템(KMS)**이다.",
     tags: ["키 관리", "KMS", "마스터키"],
+    grading: {
+      must: ["암호 키", "복호화", "KMS"],
+      bonus: ["주기적", "변경", "백업", "키 관리 시스템"],
+      synonyms: { KMS: ["키 관리 시스템", "Key Management System"], "암호 키": ["암호키", "키"] },
+    },
   },
   {
     id: "fin-w12-q07",
@@ -93,5 +114,10 @@ export const week12: Question[] = [
     modelAnswer:
       "**컬럼 암호화 (Column-Level Encryption)**\n- 일부 민감 컬럼(주민번호·카드번호 등)만 암호화\n- 장점: 사용자별 적절한 암호화 가능(의료분야에서 널리 사용)\n- 단점: 암호화된 컬럼이 인덱스를 가지면 인덱스 활용 불가 → DBMS 부하·응답 저하\n\n**DB 전체 암호화 (테이블스페이스/파일 단위)**\n- 장점: 구현 간단, 민감 컬럼 식별 불필요, 높은 안전성\n- 단점: 빈번한 암·복호화로 DBMS 부하, 사용자 식별 불가로 사용자 관리 어려움",
     tags: ["컬럼 암호화", "전체 암호화", "테이블스페이스"],
+    grading: {
+      must: ["컬럼", "인덱스", "전체 암호화", "부하"],
+      bonus: ["민감", "테이블스페이스", "구현 간단"],
+      synonyms: { 컬럼: ["column", "열"], 부하: ["성능", "응답"] },
+    },
   },
 ];

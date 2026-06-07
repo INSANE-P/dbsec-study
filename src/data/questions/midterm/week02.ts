@@ -13,6 +13,10 @@ export const week02: Question[] = [
     modelAnswer:
       "(1) **DBA** = Database Administrator (데이터베이스 관리자)\n→ DB 운영·관리 책임자. 스키마 정의, 권한 부여, 백업, 감사 담당.\n\n(2) **IDS** = Integrated Data Store\n→ 대표적인 1세대 네트워크 DBMS.\n\n(3) **IMS** = Information Management System\n→ 대표적인 1세대 계층(트리형) DBMS.\n\n(4) **NoSQL** = Not Only SQL\n→ 4세대 DBMS. 데이터 구조를 미리 정하지 않아 비정형 데이터 처리에 적합하고 확장성이 뛰어남(MongoDB, HBase, Cassandra 등).",
     tags: ["DBA", "IDS", "IMS", "NoSQL", "약어"],
+    grading: {
+      must: ["Database Administrator", "Integrated Data Store", "Information Management System", "Not Only SQL"],
+      bonus: ["네트워크", "계층", "비정형"],
+    },
   },
   {
     id: "mid-w02-q02",
@@ -39,6 +43,14 @@ export const week02: Question[] = [
     modelAnswer:
       "**데이터 사전(Data Dictionary)**: 데이터베이스에 저장되는 데이터에 관한 정보(스키마, 스키마 간 매핑 정보, 제약조건 등)를 저장하는 공간. 즉 '데이터에 대한 데이터'인 **메타데이터(Metadata)**이다.\n\n다른 명칭: **시스템 카탈로그(System Catalog)**.",
     tags: ["데이터 사전", "시스템 카탈로그", "메타데이터"],
+    grading: {
+      must: ["메타데이터", "시스템 카탈로그", "데이터에 대한 데이터"],
+      bonus: ["스키마", "제약조건"],
+      synonyms: {
+        메타데이터: ["Metadata"],
+        "시스템 카탈로그": ["System Catalog"],
+      },
+    },
   },
   {
     id: "mid-w02-q04",
@@ -50,6 +62,11 @@ export const week02: Question[] = [
     modelAnswer:
       "**① DBA(데이터베이스 관리자)**: DB 시스템 운영·관리. 스키마 정의, 권한 부여, 백업·회복, 보안 정책 수립. 주로 DDL 사용.\n\n**② 최종 사용자(End User)**: DB에 접근해 데이터를 조작(삽입·삭제·수정·검색). 주로 DML 사용.\n- 캐주얼 사용자: 이론 지식 보유, 직접 DML 작성\n- 초보(Naive) 사용자: 메뉴·GUI 응용 프로그램을 통해 사용\n\n**③ 응용 프로그래머**: C·Java 등으로 응용 프로그램을 작성하며 데이터 조작어를 삽입. 주로 DML 사용(DDL도 가능).",
     tags: ["DBA", "최종 사용자", "응용 프로그래머"],
+    grading: {
+      must: ["DBA", "최종 사용자", "응용 프로그래머", "DDL", "DML"],
+      bonus: ["권한", "스키마", "캐주얼", "초보"],
+      synonyms: { "최종 사용자": ["End User"] },
+    },
   },
   {
     id: "mid-w02-q05",
@@ -60,6 +77,10 @@ export const week02: Question[] = [
     modelAnswer:
       "**장점**\n- 데이터 중복 통제 → 저장공간 절약·일관성 유지\n- 데이터 독립성 확보\n- 데이터 동시 공유(동시성 제어)\n- 데이터 보안 향상(중앙 집중식 접근 제어)\n- 데이터 무결성 유지\n- 표준화, 장애 시 회복 가능\n\n**단점**\n- 많은 비용 발생(별도 설치·라이선스)\n- 백업과 회복이 복잡함\n- 중앙 집중 관리로 인한 취약점(장애 시 전체 업무 중단)",
     tags: ["DBMS 장단점"],
+    grading: {
+      must: ["중복", "독립성", "보안", "비용", "회복"],
+      bonus: ["일관성", "동시성", "무결성", "백업", "중앙 집중"],
+    },
   },
   {
     id: "mid-w02-q06",
@@ -71,6 +92,11 @@ export const week02: Question[] = [
     modelAnswer:
       "| 세대 | 종류 | 데이터 모델 | 대표 제품 |\n|---|---|---|---|\n| 1세대 | 네트워크 DBMS | 그래프(네트워크) | IDS |\n| 1세대 | 계층 DBMS | 트리 | IMS |\n| 2세대 | 관계 DBMS | 테이블(관계) | Oracle, MySQL, MS-SQL |\n| 3세대 | 객체지향/객체관계 DBMS | 객체지향(+관계) | O2, ONTOS, GemStone |\n| 4세대 | NoSQL | 미리 정하지 않음 | MongoDB, HBase, Cassandra |\n| 4세대 | NewSQL | — | 구글 Spanner, VoltDB, NuoDB |",
     tags: ["DBMS 발전사", "관계DBMS", "NoSQL", "NewSQL"],
+    grading: {
+      must: ["네트워크", "계층", "관계", "객체지향", "NoSQL"],
+      bonus: ["IDS", "IMS", "Oracle", "NewSQL", "MongoDB"],
+      synonyms: { 계층: ["트리"], 관계: ["테이블"] },
+    },
   },
   {
     id: "mid-w02-q07",
@@ -82,6 +108,11 @@ export const week02: Question[] = [
     modelAnswer:
       "| 구분 | Oracle | MySQL | MS-SQL |\n|---|---|---|---|\n| 유형 | 상용 관계형 DBMS | 오픈 소스 RDBMS | 상용 관계형 DBMS |\n| 장점 | 강력한 보안, 대용량 처리, 풍부한 기술 지원 | 무료, 사용 간편, 낮은 사양으로 구동 | 강력한 기술 지원·풍부한 문서 |\n| 단점 | 많은 비용, 높은 하드웨어 사양 | 기술 지원 어려움, 낮은 확장성, 일부 표준 SQL 미지원 | 많은 비용, Windows/Linux에서만 동작 |\n\nMS-SQL은 T-SQL(Transact-SQL)을 사용한다. MySQL 소유권은 오픈소스 → Sun → Oracle 순으로 이전되었다.",
     tags: ["Oracle", "MySQL", "MS-SQL"],
+    grading: {
+      must: ["Oracle", "MySQL", "MS-SQL", "상용", "오픈 소스"],
+      bonus: ["보안", "무료", "비용", "T-SQL"],
+      synonyms: { "오픈 소스": ["오픈소스", "open source"] },
+    },
   },
   {
     id: "mid-w02-q08",
@@ -93,5 +124,10 @@ export const week02: Question[] = [
     modelAnswer:
       "SQL은 Java·C 같은 완전한 프로그래밍 언어가 아니라, 데이터의 **생성 및 처리 문법만** 가지고 있어 DBMS와 통신하는 수단으로만 쓰인다. 독립적으로 모든 문제를 해결하는 범용 언어가 아니라 데이터 처리에 부속되는 언어이므로 **데이터 부속어(Data Sublanguage)**라고 한다.",
     tags: ["SQL", "데이터 부속어"],
+    grading: {
+      must: ["데이터 부속어", "프로그래밍 언어", "데이터", "통신"],
+      bonus: ["범용", "DBMS"],
+      synonyms: { "데이터 부속어": ["Data Sublanguage"] },
+    },
   },
 ];

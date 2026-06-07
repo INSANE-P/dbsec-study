@@ -46,6 +46,10 @@ export const week04: Question[] = [
     modelAnswer:
       "권한이 A → B → C로 전파(WITH GRANT OPTION)된 상황에서 A의 권한을 REVOKE 할 때:\n\n- **CASCADE**: A의 권한을 취소하면 그 권한에 의존하는 B, C의 권한까지 **연쇄적으로 모두 취소**된다.\n- **RESTRICT**: 취소하려는 권한이 다른 사용자에게 **전파된 적이 있으면 취소를 거부**한다(전파한 적 없을 때만 취소 가능).",
     tags: ["REVOKE", "CASCADE", "RESTRICT"],
+    grading: {
+      must: ["CASCADE", "RESTRICT", "연쇄", "취소"],
+      bonus: ["전파", "WITH GRANT OPTION", "거부"],
+    },
   },
   {
     id: "mid-w04-q05",
@@ -90,6 +94,10 @@ export const week04: Question[] = [
     modelAnswer:
       "**① NULL 값은 제외**하고 계산한다.\n**② WHERE 절에는 사용할 수 없다.** SELECT 또는 HAVING 절에서만 사용 가능하다.\n**③ COUNT를 제외**한 SUM/AVG/MAX/MIN은 숫자형 데이터에만 적용된다(COUNT는 모든 타입 가능).",
     tags: ["집계함수", "COUNT", "HAVING"],
+    grading: {
+      must: ["NULL", "WHERE", "HAVING", "숫자형"],
+      bonus: ["COUNT", "제외"],
+    },
   },
   {
     id: "mid-w04-q09",
@@ -111,6 +119,14 @@ export const week04: Question[] = [
     modelAnswer:
       "**공통점**: 둘 다 각 튜플을 유일하게 식별하며 중복 값을 허용하지 않는다.\n\n**차이점**: \n- PRIMARY KEY(기본키)는 **NULL을 허용하지 않으며** 테이블당 하나만 지정 가능.\n- UNIQUE(대체키)는 **NULL을 허용하며** 여러 개 지정 가능.",
     tags: ["PRIMARY KEY", "UNIQUE", "기본키"],
+    grading: {
+      must: ["PRIMARY KEY", "UNIQUE", "NULL", "중복"],
+      bonus: ["유일", "하나", "여러"],
+      synonyms: {
+        "PRIMARY KEY": ["기본키"],
+        UNIQUE: ["대체키"],
+      },
+    },
   },
   {
     id: "mid-w04-q11",
