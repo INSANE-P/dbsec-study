@@ -34,11 +34,20 @@ function ScopeChips({
 export default function ConceptsPage() {
   const [tab, setTab] = useState<Tab>("abbr");
   const [scope, setScope] = useState<ScopeFilter>("all");
+  const [query, setQuery] = useState("");
 
-  const abbrevs = useMemo(
-    () => ABBREVIATIONS.filter((a) => scope === "all" || a.scope === scope),
-    [scope],
-  );
+  const abbrevs = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    return ABBREVIATIONS.filter((a) => {
+      if (scope !== "all" && a.scope !== scope) return false;
+      if (!q) return true;
+      return (
+        a.abbr.toLowerCase().includes(q) ||
+        a.full.toLowerCase().includes(q) ||
+        a.meaning.toLowerCase().includes(q)
+      );
+    });
+  }, [scope, query]);
   const compares = useMemo(
     () => COMPARISONS.filter((c) => scope === "all" || c.scope === scope),
     [scope],
@@ -80,8 +89,36 @@ export default function ConceptsPage() {
 
       {/* 약어집 */}
       {tab === "abbr" && (
-        <div className="grid gap-3 sm:grid-cols-2">
-          {abbrevs.map((a) => (
+        <div className="space-y-4">
+          {/* 검색 */}
+          <div className="relative">
+            <svg viewBox="0 0 24 24" className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="11" cy="11" r="7" /><path d="m21 21-4.3-4.3" />
+            </svg>
+            <input
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="약어·풀네임·의미 검색 (예: TDE, 무결성, encryption)"
+              className="w-full rounded-2xl bg-surface-2 py-3 pl-11 pr-10 text-sm text-foreground outline-none transition-all placeholder:text-muted focus:bg-surface focus:ring-2 focus:ring-brand-blue/30"
+            />
+            {query && (
+              <button
+                onClick={() => setQuery("")}
+                aria-label="검색어 지우기"
+                className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full p-1 text-muted hover:bg-surface hover:text-foreground"
+              >
+                <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"><path d="M18 6 6 18M6 6l12 12" /></svg>
+              </button>
+            )}
+          </div>
+
+          {abbrevs.length === 0 ? (
+            <div className="card-soft rounded-2xl bg-surface p-10 text-center text-sm text-muted">
+              "{query}" 검색 결과가 없어요.
+            </div>
+          ) : (
+            <div className="grid gap-3 sm:grid-cols-2">
+              {abbrevs.map((a) => (
             <div key={a.abbr + a.week} className="card-soft animate-fade-up rounded-2xl bg-surface p-5">
               <div className="flex items-center justify-between">
                 <span className="font-mono text-lg font-extrabold text-brand-blue">{a.abbr}</span>
@@ -92,7 +129,9 @@ export default function ConceptsPage() {
               <div className="mt-1.5 text-sm font-bold text-foreground">{a.full}</div>
               <p className="mt-1.5 text-sm leading-relaxed text-muted-strong">{a.meaning}</p>
             </div>
-          ))}
+              ))}
+            </div>
+          )}
         </div>
       )}
 

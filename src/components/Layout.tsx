@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { NavLink, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet } from "react-router-dom";
 import ThemeToggle from "./ThemeToggle";
 
 // public/ 자산은 base 경로를 붙여 참조 (GH Pages 서브경로 대응)
@@ -64,9 +64,14 @@ function NavList({ onNavigate }: { onNavigate?: () => void }) {
   );
 }
 
-function Brand({ compact = false }: { compact?: boolean }) {
+function Brand({ compact = false, onClick }: { compact?: boolean; onClick?: () => void }) {
   return (
-    <div className="flex items-center gap-3">
+    <Link
+      to="/"
+      onClick={onClick}
+      aria-label="대시보드로 이동"
+      className="flex items-center gap-3 rounded-xl transition-opacity hover:opacity-80"
+    >
       <img
         src={LOGO}
         alt="DB 마스코트"
@@ -77,7 +82,7 @@ function Brand({ compact = false }: { compact?: boolean }) {
         <div className="text-[0.95rem] font-extrabold text-foreground">데이터베이스 보안</div>
         <div className="text-xs font-medium text-muted">시험 공부 노트</div>
       </div>
-    </div>
+    </Link>
   );
 }
 
@@ -134,7 +139,7 @@ export default function Layout() {
           }`}
         >
           <div className="mb-5 flex items-center justify-between px-2 py-1">
-            <Brand compact />
+            <Brand compact onClick={() => setOpen(false)} />
             <button onClick={() => setOpen(false)} aria-label="메뉴 닫기" className="text-muted">
               <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M18 6 6 18M6 6l12 12" /></svg>
             </button>
