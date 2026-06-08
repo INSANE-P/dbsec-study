@@ -85,7 +85,7 @@ export const week09: Question[] = [
     week: 9,
     type: "ACM",
     prompt:
-      "위 ACM(week09-q04와 동일)에서 'Bob'과 'Program1'의 관계를 서술하고, 이 ACM이 가진 보안상 문제점과 해결방안을 제시하시오.",
+      "위 ACM(week09-q04와 동일)에서 'Bob'과 'Program1'의 관계를 서술하고, 이 ACM처럼 DAC로 구현된 시스템이 가진 대표적 보안 취약점과 그 한계를 보완하는 모델을 쓰시오.",
     table: {
       name: "ACM (행=주체, 열=객체)",
       columns: ["주체＼객체", "File A", "File B", "Program1"],
@@ -97,8 +97,8 @@ export const week09: Question[] = [
       note: "R=읽기, W=쓰기, X=실행, -=권한없음",
     },
     modelAnswer:
-      "**Bob과 Program1의 관계**: Bob은 주체이고 Program1은 객체이며, Bob은 Program1에 대해 읽기·쓰기·실행(RWX) 권한을 모두 가진다.\n\n**보안상 문제점**: Bob은 File A에 아무 권한이 없고 File B에는 읽기 권한만 있다. 그러나 Bob이 Program1에 RWX 권한을 가지고 있고, Program1이 File A를 읽고(R) File B에 쓸 수(W) 있으므로, Bob은 Program1을 통해 **간접적으로** File A를 읽고 File B에 쓸 수 있게 된다(권한 상속/우회 문제).\n\n**해결방안**: 권한 상속을 명시적으로 통제할 수 있는 **역할 기반 접근제어(RBAC)**를 도입하여 해결한다.",
-    tags: ["ACM", "권한 상속", "RBAC"],
+      "**Bob과 Program1의 관계**: Bob은 주체이고 Program1은 객체이며, Bob은 Program1에 대해 읽기·쓰기·실행(RWX) 권한을 모두 가진다.\n\n**보안상 취약점 — 트로이 목마(Trojan Horse) 공격**: ACM/ACL은 DAC 구현 방식이며, DAC는 응용 프로그램에 내장된 트로이 목마로부터 데이터를 보호하지 못한다. 사용자가 트로이 목마가 심긴 프로그램(예: Program1)을 실행하면 그 프로그램이 사용자 권한으로 동작하여, 사용자가 가진 권한 범위 내에서 데이터를 몰래 복사·유출할 수 있다.\n\n**보완 모델**: 주체·객체의 보안 등급에 따라 강제로 정보 흐름을 통제하는 **강제적 접근제어(MAC)**로 보완한다.",
+    tags: ["ACM", "트로이목마", "MAC"],
   },
   {
     id: "fin-w09-q06",

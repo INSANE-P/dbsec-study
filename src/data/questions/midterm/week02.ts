@@ -11,7 +11,7 @@ export const week02: Question[] = [
     prompt:
       "다음 약어의 풀네임과 의미를 작성하시오.\n(1) DBA  (2) IDS  (3) IMS  (4) NoSQL",
     modelAnswer:
-      "(1) **DBA** = Database Administrator (데이터베이스 관리자)\n→ DB 운영·관리 책임자. 스키마 정의, 권한 부여, 백업, 감사 담당.\n\n(2) **IDS** = Integrated Data Store\n→ 대표적인 1세대 네트워크 DBMS.\n\n(3) **IMS** = Information Management System\n→ 대표적인 1세대 계층(트리형) DBMS.\n\n(4) **NoSQL** = Not Only SQL\n→ 4세대 DBMS. 데이터 구조를 미리 정하지 않아 비정형 데이터 처리에 적합하고 확장성이 뛰어남(MongoDB, HBase, Cassandra 등).",
+      "(1) **DBA** = Database Administrator (데이터베이스 관리자)\n→ DB 운영·관리 책임자. 스키마 정의, 권한 부여, 백업·회복 담당.\n\n(2) **IDS** = Integrated Data Store\n→ 대표적인 1세대 네트워크 DBMS.\n\n(3) **IMS** = Information Management System\n→ 대표적인 1세대 계층(트리형) DBMS.\n\n(4) **NoSQL** = Not Only SQL\n→ 4세대 DBMS. 데이터 구조를 미리 정하지 않아 비정형 데이터 처리에 적합하고 확장성이 뛰어남(MongoDB, HBase, Cassandra 등).",
     tags: ["DBA", "IDS", "IMS", "NoSQL", "약어"],
     grading: {
       must: ["Database Administrator", "Integrated Data Store", "Information Management System", "Not Only SQL"],
