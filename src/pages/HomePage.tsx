@@ -4,8 +4,7 @@ import { useProgress } from "@/lib/progressStore";
 import { byScope, computeStats, type Stats } from "@/lib/stats";
 import { ALL_TYPES } from "@/lib/ui";
 import ProgressBar from "@/components/ProgressBar";
-
-const LOGO = `${import.meta.env.BASE_URL}db-logo.png`;
+import GrowthWidget from "@/components/GrowthWidget";
 
 function StatCard({ title, sub, stats, to }: { title: string; sub: string; stats: Stats; to: string }) {
   const pct = stats.total === 0 ? 0 : Math.round((stats.graded / stats.total) * 100);
@@ -63,15 +62,15 @@ export default function HomePage() {
   return (
     <div className="space-y-7">
       {/* 인사 */}
-      <header className="flex items-center gap-4">
-        <img src={LOGO} alt="" className="h-16 w-16 sm:h-20 sm:w-20" draggable={false} />
-        <div>
-          <h1 className="text-[1.7rem] font-extrabold leading-tight tracking-tight text-foreground sm:text-3xl">
-            데이터베이스 보안 시험 공부
-          </h1>
-          <p className="mt-1 text-muted-strong">기출 유형으로 풀고, 답을 확인하고, 스스로 채점해요.</p>
-        </div>
+      <header>
+        <h1 className="text-[1.7rem] font-extrabold leading-tight tracking-tight text-foreground sm:text-3xl">
+          데이터베이스 보안 시험 공부
+        </h1>
+        <p className="mt-1 text-muted-strong">기출 유형으로 풀고, 답을 확인하고, 스스로 채점해요.</p>
       </header>
+
+      {/* 성장 캐릭터 */}
+      <GrowthWidget />
 
       {/* 전체 진행률 */}
       <section className="card-soft rounded-3xl bg-surface p-6 sm:p-7">

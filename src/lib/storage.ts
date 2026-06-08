@@ -22,6 +22,8 @@ type Store = Record<string, Progress>;
 
 const KEY = "dbsec.progress.v1";
 const THEME_KEY = "dbsec.theme";
+const IDENTITY_KEY = "dbsec.identity.v1";
+const SEEN_LEVEL_KEY = "dbsec.seenLevel.v1";
 
 function read(): Store {
   try {
@@ -73,9 +75,52 @@ export function clearProgress(id: string) {
   write(store);
 }
 
-/** 전체 학습 기록 초기화 */
+/** 전체 학습 기록 초기화 (성장 레벨 기록도 함께 초기화) */
 export function resetAll() {
   write({});
+  try {
+    localStorage.removeItem(SEEN_LEVEL_KEY);
+  } catch {
+    /* 무시 */
+  }
+}
+
+// ── 트레이너 아이덴티티 / 성장 ─────────────────────────────────────────────
+// 캐릭터를 꾸미는 닉네임·아바타. 학습 기록(progress)과 별도 키라 진행률을
+// 초기화해도 닉네임은 남는다.
+
+/** 트레이너(사용자) 정보. avatarUrl 우선, 없으면 github 아이디로 아바타 생성 */
+export type Identity = { name?: string; github?: string; avatarUrl?: string };
+
+export function getIdentity(): Identity {
+  try {
+    const raw = localStorage.getItem(IDENTITY_KEY);
+    return raw ? (JSON.parse(raw) as Identity) : {};
+  } catch {
+    return {};
+  }
+}
+
+export function setIdentity(id: Identity) {
+  try {
+    localStorage.setItem(IDENTITY_KEY, JSON.stringify(id));
+  } catch {
+    /* 무시 */
+  }
+}
+
+/** 마지막으로 사용자에게 보여준 레벨(레벨업 축하를 한 번만 띄우기 위함) */
+export function getSeenLevel(): number {
+  const v = Number(localStorage.getItem(SEEN_LEVEL_KEY));
+  return Number.isFinite(v) && v > 0 ? v : 0;
+}
+
+export function setSeenLevel(level: number) {
+  try {
+    localStorage.setItem(SEEN_LEVEL_KEY, String(level));
+  } catch {
+    /* 무시 */
+  }
 }
 
 // ── 테마 ────────────────────────────────────────────────────────────────

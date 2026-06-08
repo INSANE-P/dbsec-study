@@ -1,12 +1,16 @@
 import { useState } from "react";
 import { Link, NavLink, Outlet } from "react-router-dom";
 import ThemeToggle from "./ThemeToggle";
+import TierEmblem from "./TierEmblem";
+import { useGrowth } from "./GrowthProvider";
+import { getIdentity } from "@/lib/storage";
 
 // public/ 자산은 base 경로를 붙여 참조 (GH Pages 서브경로 대응)
 const LOGO = `${import.meta.env.BASE_URL}db-logo.png`;
 
 const NAV = [
   { to: "/", label: "대시보드", end: true, icon: "home" },
+  { to: "/me", label: "내 캐릭터", icon: "spark" },
   { to: "/weeks", label: "주차별 학습", icon: "layers" },
   { to: "/study", label: "문제 풀이", icon: "pencil" },
   { to: "/concepts", label: "개념 정리", icon: "book" },
@@ -22,7 +26,7 @@ function Icon({ name }: { name: string }) {
     strokeWidth: 2,
     strokeLinecap: "round" as const,
     strokeLinejoin: "round" as const,
-    className: "h-[18px] w-[18px]",
+    className: "h-[18px] w-[18px] shrink-0",
   };
   switch (name) {
     case "home":
@@ -37,6 +41,8 @@ function Icon({ name }: { name: string }) {
       return <svg {...c}><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" /><path d="M4 22v-7" /></svg>;
     case "heart":
       return <svg {...c}><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1L12 21l7.7-7.6 1.1-1a5.5 5.5 0 0 0 0-7.8z" /></svg>;
+    case "spark":
+      return <svg {...c}><path d="M12 3 L13.6 10.4 L21 12 L13.6 13.6 L12 21 L10.4 13.6 L3 12 L10.4 10.4 Z" /></svg>;
     default:
       return null;
   }
@@ -89,6 +95,43 @@ function Brand({ compact = false, onClick }: { compact?: boolean; onClick?: () =
   );
 }
 
+function GrowthChip({ compact = false, onClick }: { compact?: boolean; onClick?: () => void }) {
+  const g = useGrowth();
+  // 캐릭터 등록 전에는 헤더에 등급/경험치를 표시하지 않는다
+  const id = getIdentity();
+  if (!(id.name || id.github || id.avatarUrl)) return null;
+  if (compact) {
+    return (
+      <Link
+        to="/"
+        onClick={onClick}
+        aria-label={`내 등급 Lv${g.level} ${g.tier.name}`}
+        className="flex items-center gap-1.5 rounded-xl bg-surface-2 px-2.5 py-1.5"
+      >
+        <TierEmblem level={g.level} size={20} />
+        <span className="text-xs font-extrabold text-foreground">Lv{g.level}</span>
+      </Link>
+    );
+  }
+  return (
+    <Link
+      to="/"
+      onClick={onClick}
+      className="flex items-center gap-2.5 rounded-2xl bg-surface-2 px-3 py-2.5 transition-colors hover:bg-border/60"
+    >
+      <TierEmblem level={g.level} size={28} />
+      <div className="min-w-0 flex-1 leading-tight">
+        <div className="truncate text-xs font-extrabold text-foreground">
+          Lv{g.level} · {g.tier.name}
+        </div>
+        <div className="text-[10px] font-medium text-muted">
+          {g.isMax ? "최고 등급 달성!" : `다음 등급까지 ${g.toNext} XP`}
+        </div>
+      </div>
+    </Link>
+  );
+}
+
 export default function Layout() {
   const [open, setOpen] = useState(false);
 
@@ -102,9 +145,12 @@ export default function Layout() {
         <div className="flex-1">
           <NavList />
         </div>
-        <div className="flex items-center justify-between rounded-2xl bg-surface-2 px-4 py-3">
-          <span className="text-sm font-semibold text-muted-strong">테마</span>
-          <ThemeToggle />
+        <div className="space-y-2">
+          <GrowthChip />
+          <div className="flex items-center justify-between rounded-2xl bg-surface-2 px-4 py-3">
+            <span className="text-sm font-semibold text-muted-strong">테마</span>
+            <ThemeToggle />
+          </div>
         </div>
       </aside>
 
@@ -112,6 +158,7 @@ export default function Layout() {
       <header className="sticky top-0 z-30 flex items-center justify-between bg-surface/90 px-4 py-3 backdrop-blur lg:hidden">
         <Brand compact />
         <div className="flex items-center gap-2">
+          <GrowthChip compact />
           <ThemeToggle />
           <button
             onClick={() => setOpen(true)}
