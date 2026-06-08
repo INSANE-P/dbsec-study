@@ -7,6 +7,7 @@ import WeekNotesPage from "@/pages/WeekNotesPage";
 import StudyPage from "@/pages/StudyPage";
 import ConceptsPage from "@/pages/ConceptsPage";
 import WrongNotePage from "@/pages/WrongNotePage";
+import AboutPage from "@/pages/AboutPage";
 import NotFoundPage from "@/pages/NotFoundPage";
 
 export default function App() {
@@ -20,6 +21,7 @@ export default function App() {
           <Route path="study" element={<StudyPage />} />
           <Route path="concepts" element={<ConceptsPage />} />
           <Route path="wrong" element={<WrongNotePage />} />
+          <Route path="about" element={<AboutPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
