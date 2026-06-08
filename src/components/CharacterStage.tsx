@@ -142,7 +142,7 @@ export default function CharacterStage() {
           onMouseLeave={(e) => (e.currentTarget.style.background = "")}
         >
           <svg viewBox="0 0 24 24" className="h-4 w-4 shrink-0" fill="currentColor" aria-hidden="true">
-            <path d="M12 21s-7-4.5-9.3-9C1 8.7 2.6 5.5 5.8 5.5c1.9 0 3.2 1.1 4.2 2.4 1-1.3 2.3-2.4 4.2-2.4 3.2 0 4.8 3.2 3.1 6.5C19 16.5 12 21 12 21z" />
+            <path d="M12 21 C12 21 4 14.5 4 9 C4 6.5 6 4.5 8.5 4.5 C10.1 4.5 11.3 5.5 12 6.6 C12.7 5.5 13.9 4.5 15.5 4.5 C18 4.5 20 6.5 20 9 C20 14.5 12 21 12 21 Z" />
           </svg>
           쓰다듬기
         </button>
