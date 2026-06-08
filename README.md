@@ -1,9 +1,17 @@
-# 데이터베이스 보안, 이걸로 공부 끝내자 📘
+<p align="center">
+  <img src="public/db-logo.png" alt="데이터베이스 보안 공부 사이트 로고" width="150" />
+</p>
 
-> 혼자 풀고, 바로 채점하고, 약한 부분만 다시 보는 데이터베이스 보안 시험 공부 사이트.
-> 그냥 링크만 누르면 바로 시작돼요.
+<h1 align="center">데이터베이스 보안, 이걸로 공부 끝내자 📘</h1>
 
-### 👉 [지금 바로 공부하러 가기](https://insane-p.github.io/dbsec-study/)
+<p align="center">
+  혼자 풀고, 바로 채점하고, 약한 부분만 다시 보는 데이터베이스 보안 시험 공부 사이트.<br/>
+  그냥 링크만 누르면 바로 시작돼요.
+</p>
+
+<p align="center">
+  <a href="https://insane-p.github.io/dbsec-study/"><b>👉 지금 바로 공부하러 가기</b></a>
+</p>
 
 ---
 
