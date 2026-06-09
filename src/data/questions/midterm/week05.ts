@@ -29,7 +29,7 @@ export const week05: Question[] = [
     week: 5,
     type: "비교서술",
     prompt:
-      "보안 4대 공격 유형(Interruption, Interception, Modification, Fabrication)과 각각 침해하는 보안 목표를 짝지으시오.",
+      "보안 공격을 크게 4가지 유형으로 분류하고, 각 유형이 침해하는 보안 목표를 짝지으시오.",
     modelAnswer:
       "| 공격 유형 | 한글 | 침해 목표 |\n|---|---|---|\n| Interruption | 서비스 거부(DoS) | 가용성(Availability) |\n| Interception | 갈취 | 기밀성(Confidentiality) |\n| Modification | 수정 | 무결성(Integrity) |\n| Fabrication | 신분 위장 | 인증(Authentication) |\n\n참고: Fabrication Attack = Masquerade Attack(신분 위장 공격)으로도 불린다.",
     tags: ["공격유형", "Interruption", "Interception", "Modification", "Fabrication"],
