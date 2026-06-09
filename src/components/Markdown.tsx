@@ -126,15 +126,30 @@ export default function Markdown({
       continue;
     }
 
-    // 코드블록 ```
-    if (trimmed.startsWith("```")) {
+    // 코드블록 ``` — 줄 맨 앞이 아니라 "(1) ```sql" 처럼 앞에 텍스트가 붙어 있어도 인식
+    const fenceIdx = line.indexOf("```");
+    if (fenceIdx !== -1) {
+      const prefix = line.slice(0, fenceIdx).trim();
+      if (prefix) {
+        blocks.push(
+          <p key={key++} className="my-1.5">
+            {renderInline(prefix)}
+          </p>,
+        );
+      }
       const code: string[] = [];
       i++;
-      while (i < lines.length && !lines[i].trim().startsWith("```")) {
+      while (i < lines.length && !lines[i].includes("```")) {
         code.push(lines[i]);
         i++;
       }
-      i++;
+      // 닫는 펜스 줄에 뒤따르는 텍스트가 있으면 문단으로
+      let trailing = "";
+      if (i < lines.length) {
+        const ci = lines[i].indexOf("```");
+        trailing = lines[i].slice(ci + 3).trim();
+        i++;
+      }
       blocks.push(
         <pre
           key={key++}
@@ -143,6 +158,13 @@ export default function Markdown({
           <code>{code.join("\n")}</code>
         </pre>,
       );
+      if (trailing) {
+        blocks.push(
+          <p key={key++} className="my-1.5">
+            {renderInline(trailing)}
+          </p>,
+        );
+      }
       continue;
     }
 
