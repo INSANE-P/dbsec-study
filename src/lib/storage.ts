@@ -75,6 +75,20 @@ export function clearProgress(id: string) {
   write(store);
 }
 
+/** 여러 문제에서 '입력한 답'만 비운다 (채점·즐겨찾기는 유지) */
+export function clearAnswers(ids: string[]) {
+  const store = read();
+  let changed = false;
+  for (const id of ids) {
+    const p = store[id];
+    if (p && p.answer) {
+      store[id] = { ...p, answer: "", updatedAt: Date.now() };
+      changed = true;
+    }
+  }
+  if (changed) write(store);
+}
+
 /** 전체 학습 기록 초기화 (성장 레벨 기록도 함께 초기화) */
 export function resetAll() {
   write({});

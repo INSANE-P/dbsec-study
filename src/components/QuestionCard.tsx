@@ -83,6 +83,19 @@ export default function QuestionCard({ q, index }: { q: Question; index?: number
         >
           {revealed ? "답 접기" : "답 확인하기"}
         </button>
+        {/* 내가 쓴 답칸만 비우기 (채점·즐겨찾기는 유지) */}
+        {answer.trim() && (
+          <button
+            onClick={() => {
+              setAnswer("");
+              saveAnswer(q.id, "");
+            }}
+            className="inline-flex items-center gap-1.5 rounded-2xl bg-surface-2 px-4 py-2.5 text-sm font-bold text-muted-strong transition-all hover:text-brand-red active:scale-[0.98]"
+          >
+            <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 6h18M8 6V4a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2m2 0v14a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V6" /></svg>
+            답 지우기
+          </button>
+        )}
         {revealed && <SelfGrade value={p?.grade} onChange={(g) => grade(q.id, g)} />}
       </div>
 

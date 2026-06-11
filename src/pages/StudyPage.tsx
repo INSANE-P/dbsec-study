@@ -10,7 +10,7 @@ import QuestionCard from "@/components/QuestionCard";
 import ProgressBar from "@/components/ProgressBar";
 
 export default function StudyPage() {
-  const { progress } = useProgress();
+  const { progress, clearAnswers } = useProgress();
   const [params] = useSearchParams();
   const urlScope = params.get("scope") as Scope | null;
   const urlWeek = params.get("week");
@@ -26,6 +26,7 @@ export default function StudyPage() {
   const [search, setSearch] = useState("");
   const [bookmarkOnly, setBookmarkOnly] = useState(false);
   const [shuffleSeed, setShuffleSeed] = useState(0); // 0이면 섞기 끔
+  const [clearNonce, setClearNonce] = useState(0); // 답 일괄 삭제 시 카드 강제 재마운트용
 
   function enter(scope: Filters["scope"], week: Filters["week"] = "all") {
     setFilters({ scope, week, type: "all" });
@@ -123,6 +124,18 @@ export default function StudyPage() {
   }
   const stats = computeStats(filtered, progress);
   const bookmarkCount = ALL_QUESTIONS.filter((q) => progress[q.id]?.bookmark).length;
+  // 현재 목록에서 '내가 쓴 답'이 들어 있는 문제 수 (채점·즐겨찾기와 무관)
+  const answeredIds = filtered.filter((q) => (progress[q.id]?.answer ?? "").trim()).map((q) => q.id);
+
+  function clearAllAnswers() {
+    if (answeredIds.length === 0) return;
+    const ok = window.confirm(
+      `현재 목록의 답안 ${answeredIds.length}개를 모두 지웁니다.\n채점 결과와 즐겨찾기는 그대로 남습니다. 계속할까요?`,
+    );
+    if (!ok) return;
+    clearAnswers(answeredIds);
+    setClearNonce((n) => n + 1); // 떠 있는 카드의 입력칸도 비워지도록 재마운트
+  }
 
   return (
     <div className="space-y-5">
@@ -187,6 +200,15 @@ export default function StudyPage() {
                 원래 순서
               </button>
             )}
+            <button
+              onClick={clearAllAnswers}
+              disabled={answeredIds.length === 0}
+              title="현재 목록의 내가 쓴 답을 한 번에 비워요 (채점·즐겨찾기는 유지)"
+              className="inline-flex items-center gap-1.5 rounded-full bg-surface-2 px-3 py-1.5 text-sm font-bold text-muted-strong transition-colors hover:text-brand-red disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:text-muted-strong"
+            >
+              <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 6h18M8 6V4a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2m2 0v14a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V6" /></svg>
+              답 전체 지우기 {answeredIds.length > 0 && `(${answeredIds.length})`}
+            </button>
             <label className="flex cursor-pointer items-center gap-2 text-sm font-medium text-muted-strong">
               <input
                 type="checkbox"
@@ -208,7 +230,7 @@ export default function StudyPage() {
       ) : (
         <div className="space-y-4">
           {filtered.map((q, i) => (
-            <QuestionCard key={q.id} q={q} index={i} />
+            <QuestionCard key={`${q.id}-${clearNonce}`} q={q} index={i} />
           ))}
         </div>
       )}
